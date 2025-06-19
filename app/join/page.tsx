@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import Logo from "@/public/branding/logoomc.png";
 import { HomeIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import Logo from "@/public/branding/logoomc.png";
+import { useState } from "react";
 
 export default function Page() {
   const [copied, setCopied] = useState(false);
@@ -47,14 +47,6 @@ export default function Page() {
           {copied ? "Copié !" : "Copier l'IP"}
         </button>
       </div>
-
-    <Link
-      href="/"
-      className="mt-10 px-4 py-2 dark:bg-white bg-black dark:text-black text-white rounded dark:hover:bg-gray-100 hover:bg-gray-900 transition duration-200 flex items-center justify-center"
-    >
-      <HomeIcon className="inline-block mr-2" size={16} />
-      Retour à l&apos;accueil
-    </Link>
     </div>
   );
 }
