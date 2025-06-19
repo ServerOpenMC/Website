@@ -1,13 +1,8 @@
-"use client";
-
-import { ArrowRightIcon, Heart, Shield, Zap } from "lucide-react";
+import { ArrowRightIcon, Heart, Link, Shield, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 export default function AboutSection() {
-  const router = useRouter();
-
   const features = [
     {
       icon: Shield,
@@ -97,10 +92,12 @@ export default function AboutSection() {
             <Button
               size="lg"
               className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 text-base px-8"
-              onClick={() => router.push("/join")}
+              asChild
             >
-              Commencer à Jouer
-              <ArrowRightIcon className="ml-2 h-5 w-5" />
+              <Link href="/join">
+                Commencer à Jouer
+                <ArrowRightIcon className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             <Button
               variant="outline"

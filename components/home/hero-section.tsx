@@ -20,12 +20,17 @@ export default function HeroSection() {
           <div className="z-10 flex items-center justify-center mb-2">
             <div
               className={cn(
-                "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                "group inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/90 px-4 py-2 text-sm font-medium text-gray-900 shadow-sm backdrop-blur-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-white hover:shadow-md hover:scale-105 dark:border-white/10 dark:bg-neutral-900/90 dark:text-white dark:hover:bg-neutral-800/90"
               )}
             >
-              <Link href="https://github.com/ServerOpenMC/" target="_blank">
-                <span>✨ Open-Source</span>
-                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+              <Link
+                href="https://github.com/ServerOpenMC/"
+                target="_blank"
+                className="flex items-center gap-2"
+              >
+                <span className="text-lg">✨</span>
+                <span>Open-Source</span>
+                <ArrowRightIcon className="size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
