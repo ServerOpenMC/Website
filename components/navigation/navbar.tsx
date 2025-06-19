@@ -21,25 +21,28 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
+    <div className="fixed top-0 left-0 right-0 z-50 navbar-light bg-background/80 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="transition-transform duration-200 hover:scale-105"
+            className="transition-all duration-300 hover:scale-105 relative group"
           >
-            <Image src={Logo} alt="OpenMC Logo" width={160} height={40} />
+            <div className="absolute inset-0 bg-primary/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative">
+              <Image src={Logo} alt="OpenMC Logo" width={160} height={40} />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
             {NAVBAR_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="text-foreground hover:text-primary transition-colors duration-300 font-medium"
               >
                 {link.label}
               </Link>
@@ -48,10 +51,10 @@ export default function Navbar() {
 
           {/* Desktop CTA Button */}
           <div className="hidden md:flex">
-            <Button asChild>
+            <Button size="lg" className="unified-button-primary group" asChild>
               <Link href="/join">
                 Rejoindre le Serveur
-                <ArrowRightIcon className="ml-1 h-4 w-4" />
+                <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -59,16 +62,20 @@ export default function Navbar() {
           {/* Mobile Menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+              >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[400px] p-4 [&>button]:hidden"
+              className="w-[300px] sm:w-[400px] p-6 [&>button]:hidden glass-effect-strong border-l border-border/50"
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-8">
                 <SheetHeader>
                   <SheetTitle className="text-left">
                     <Image
@@ -80,32 +87,42 @@ export default function Navbar() {
                   </SheetTitle>
                 </SheetHeader>
                 <SheetClose asChild>
-                  <Button variant="ghost" size="icon">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+                  >
                     <X className="h-5 w-5" />
                     <span className="sr-only">Fermer</span>
                   </Button>
                 </SheetClose>
               </div>
-              <nav className="flex flex-col gap-4 mt-6">
+              <nav className="flex flex-col gap-2">
                 {NAVBAR_LINKS.map((link) => (
                   <SheetClose asChild key={link.href}>
                     <Link
                       href={link.href}
                       target={link.external ? "_blank" : undefined}
-                      className="block py-2 px-4 text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors duration-200 font-medium"
+                      className="block py-3 px-4 text-foreground hover:text-primary hover:bg-primary/10 rounded-xl transition-all duration-300 font-medium"
                     >
                       {link.label}
                     </Link>
                   </SheetClose>
                 ))}
-                <SheetClose asChild>
-                  <Button asChild className="w-full">
-                    <Link href="/join">
-                      Rejoindre le Serveur
-                      <ArrowRightIcon className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </SheetClose>
+                <div className="mt-6 pt-6 border-t border-border/50">
+                  <SheetClose asChild>
+                    <Button
+                      size="lg"
+                      className="w-full unified-button-primary group"
+                      asChild
+                    >
+                      <Link href="/join">
+                        Rejoindre le Serveur
+                        <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </SheetClose>
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

@@ -52,9 +52,9 @@ export default function AboutSection() {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center relative p-6 rounded-2xl border border-border bg-card hover:bg-card/80 transition-all duration-300 hover:shadow-lg"
+            className="unified-card-simple p-6 text-center group"
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors duration-300">
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors duration-300 mx-auto">
               <feature.icon className="w-6 h-6 text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
@@ -63,7 +63,7 @@ export default function AboutSection() {
         ))}
       </div>
 
-      <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 md:p-12 relative overflow-hidden mb-12">
+      <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 rounded-3xl border border-primary/20 p-8 md:p-12 relative overflow-hidden mb-12 transition-all duration-300">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
 
@@ -83,28 +83,28 @@ export default function AboutSection() {
             {gameFeatures.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-center gap-3 bg-background/50 rounded-lg p-3 backdrop-blur-sm ring-1 ring-border "
+                className="flex items-center gap-3 glass-effect rounded-lg p-3"
               >
                 <span className="text-sm font-medium">{feature}</span>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 text-base px-8"
+              className="unified-button-primary group px-8"
               asChild
             >
               <Link href="/join">
                 Commencer à Jouer
-                <ArrowRightIcon className="ml-2 h-5 w-5" />
+                <ArrowRightIcon className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="text-base px-8"
+              className="unified-button-secondary px-8"
               asChild
             >
               <Link

@@ -21,7 +21,7 @@ export default function ServerConnection() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-6 md:p-8 border border-primary/20 shadow-lg">
+    <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-6 md:p-8 border border-primary/20 transition-all duration-300">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2 mb-3">
           <Server className="h-6 w-6 text-primary" />
@@ -42,7 +42,7 @@ export default function ServerConnection() {
         </div>
 
         <div className="max-w-lg mx-auto mb-8">
-          <div className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-5 shadow-inner">
+          <div className="glass-effect rounded-xl p-5">
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1 text-left">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">
@@ -56,7 +56,7 @@ export default function ServerConnection() {
                 onClick={handleCopy}
                 variant="outline"
                 size="sm"
-                className="shrink-0 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
+                className="unified-button-secondary shrink-0"
                 aria-label="Copier l'adresse IP du serveur"
               >
                 {copied ? (
@@ -73,7 +73,7 @@ export default function ServerConnection() {
           <Button
             onClick={handleCopy}
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 group"
+            className="unified-button-primary group"
           >
             {copied ? (
               <>
@@ -91,7 +91,7 @@ export default function ServerConnection() {
           <Button
             variant="outline"
             size="lg"
-            className="border-primary/30 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300"
+            className="unified-button-secondary"
             asChild
           >
             <Link
