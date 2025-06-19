@@ -7,14 +7,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
 export function ThemeHelper() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Only render after mounting to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const getThemeIcon = () => {
+    if (!mounted) {
+      // Return a default icon during server-side rendering
+      return <Monitor className="h-5 w-5 text-primary" />;
+    }
+
     switch (theme) {
       case "dark":
         return <Sun className="h-5 w-5 text-primary" />;
