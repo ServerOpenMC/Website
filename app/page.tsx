@@ -1,8 +1,15 @@
-import Header from "@/components/home/header";
+import AboutSection from "@/components/home/about-section";
+import DiscordSection from "@/components/home/discord-section";
+import HeroSection from "@/components/home/hero-section";
+import StatsSection from "@/components/home/stats-section";
+
 export default function Home() {
   return (
     <>
-      <Header />
+      <HeroSection />
+      <StatsSection />
+      <AboutSection />
+      <DiscordSection />
     </>
   );
 }
