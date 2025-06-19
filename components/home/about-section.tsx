@@ -1,6 +1,8 @@
-import { ArrowRightIcon, Heart, Link, Shield, Zap } from "lucide-react";
+import { ArrowRightIcon, Heart, Shield, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import ServerConnection from "./server-connection";
 
 export default function AboutSection() {
   const features = [
@@ -61,7 +63,7 @@ export default function AboutSection() {
         ))}
       </div>
 
-      <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 md:p-12 relative overflow-hidden mb-12">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
 
@@ -105,17 +107,20 @@ export default function AboutSection() {
               className="text-base px-8"
               asChild
             >
-              <a
+              <Link
                 href="https://discord.gg/H7DrUjHw7q"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Rejoindre Discord
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Composant de connexion serveur */}
+      <ServerConnection />
     </section>
   );
 }
