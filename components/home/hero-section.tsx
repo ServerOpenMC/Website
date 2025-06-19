@@ -1,6 +1,5 @@
 import { ArrowRightIcon, HeartIcon } from "lucide-react";
 
-import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 import { Button } from "@/components/ui/button";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import Image from "next/image";
@@ -25,10 +24,8 @@ export default function HeroSection() {
               )}
             >
               <Link href="https://github.com/ServerOpenMC/" target="_blank">
-                <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-                  <span>✨ Open-Source</span>
-                  <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-                </AnimatedShinyText>
+                <span>✨ Open-Source</span>
+                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
               </Link>
             </div>
           </div>
