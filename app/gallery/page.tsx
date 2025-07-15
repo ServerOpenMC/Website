@@ -111,6 +111,7 @@ export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const filteredImages =
     selectedCategory === "all"
@@ -184,7 +185,11 @@ export default function GalleryPage() {
                 selectedCategory === category.key ? "default" : "outline"
               }
               size="sm"
-              onClick={() => setSelectedCategory(category.key)}
+              onClick={() => {
+                setIsAnimating(true);
+                setSelectedCategory(category.key);
+                setTimeout(() => setIsAnimating(false), 500);
+              }}
               className="gap-2"
             >
               <span>{category.icon}</span>
@@ -206,8 +211,8 @@ export default function GalleryPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                whileHover={{ y: -8 }}
-                className="group cursor-pointer"
+                layoutId={`card-${image.id}`}
+                className={`group cursor-pointer ${!isAnimating ? 'hover:-translate-y-2 transition-transform duration-200' : ''}`}
                 onClick={() => openModal(image, index)}
               >
                 <Card className="overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg py-0">
