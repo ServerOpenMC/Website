@@ -546,7 +546,7 @@ export default function ChangelogPage() {
                                                   variant="outline"
                                                   size="sm"
                                                   asChild
-                                                  className="h-[1.25em] text-xs px-1.5 mx-0.5 inline-flex items-center gap-0.5 hover:bg-primary/10 hover:border-primary/50 transition-colors align-middle font-normal border-muted-foreground/30"
+                                                  className="h-[2em] text-xs px-2 mx-0.5 inline-flex items-center gap-0.5 hover:bg-primary/10 hover:border-primary/50 transition-colors align-middle font-normal border-muted-foreground/30"
                                                 >
                                                   <a
                                                     href={href}
