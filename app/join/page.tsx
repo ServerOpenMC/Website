@@ -211,14 +211,16 @@ export default function JoinPage() {
               ].map((item) => (
                 <Card
                   key={item.step}
-                  className="bg-card rounded-xl border shadow-sm items-center"
+                  className="bg-card rounded-xl border shadow-sm"
                 >
-                  <CardContent className="text-left">
-                    <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg mb-4 mx-auto">
+                  <CardContent className="flex flex-col items-center text-center gap-4">
+                    <div className="w-12 h-12 flex-shrink-0 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg">
                       {item.step}
                     </div>
-                    <h4 className="font-semibold mb-2">{item.title}</h4>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    <div className="flex flex-col gap-2">
+                      <h4 className="font-semibold text-base leading-tight">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
