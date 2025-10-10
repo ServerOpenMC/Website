@@ -274,7 +274,6 @@ export default function Contributors() {
               ease: "easeOut",
             }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
             className="flex flex-col items-center group"
           >
             <Link
