@@ -19,7 +19,7 @@ OpenMC est un projet communautaire open-source dédié à la création d'un serv
 5. Une fois une fonctionnalité implémentée et fonctionnelle, créez une pull request.
 6. Après approbation, la fonctionnalité sera disponible sur le serveur de développement pour des tests.
 
-- **IP du serveur** : `play.openmc.fr` (Minecraft Java Edition 1.21.1)
+- **IP du serveur** : `play.openmc.fr` (Minecraft Java Edition 26.2)
 - **Site web** : [openmc.fr](https://openmc.fr)
 
 ## 🚧 Démarrage
