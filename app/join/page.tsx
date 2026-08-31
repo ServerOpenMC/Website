@@ -47,7 +47,7 @@ export default function JoinPage() {
     const fetchOfficialServerStatus = async () => {
       try {
         const response = await fetch(
-          `https://api.mcsrvstat.us/3/play.openmc.fr`
+          `https://api.mcsrvstat.us/3/${process.env.NEXT_PUBLIC_IP_PROD}`
         );    
         const data = await response.json();
 
@@ -79,7 +79,7 @@ export default function JoinPage() {
     const fetchBetaServerStatus = async () => {
       try {
         const response = await fetch(
-          `https://api.mcsrvstat.us/3/beta.openmc.fr`
+          `https://api.mcsrvstat.us/3/${process.env.NEXT_PUBLIC_IP_BETA}`
         );    
         const data = await response.json();
 
@@ -197,7 +197,7 @@ export default function JoinPage() {
                 </button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Copiez cette adresse dans votre client Minecraft
+                Copiez cette adresse dans votre client Minecraft pour rejoindre le serveur officiel
               </p>
             </div>
 
