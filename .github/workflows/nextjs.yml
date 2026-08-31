@@ -28,7 +28,7 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    environment: github-pages // à modifier en fonction de l'environnement de déploiement
+    environment: github-pages # à modifier en fonction de l'environnement de déploiement
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,16 +75,14 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_IP_PROD: ${{ secrets.NEXT_PUBLIC_IP_PROD }}
+          NEXT_PUBLIC_IP_BETA: ${{ secrets.NEXT_PUBLIC_IP_BETA }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
-      -name: Secrets injections
-        env:
-          NEXT_PUBLIC_IP_PROD: ${{ secrets.NEXT_PUBLIC_IP_PROD }}
-          NEXT_PUBLIC_IP_BETA: ${{ secrets.NEXT_PUBLIC_IP_BETA }}
-
 
   # Deployment job
   deploy:
