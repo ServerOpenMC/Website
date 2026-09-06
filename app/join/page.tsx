@@ -22,6 +22,9 @@ interface ServerStatus {
     list: string[];
     uuid?: { [key: string]: string };
   };
+  protocol: {
+    name: string;
+  };
   version: string;
   description: string;
 }
@@ -34,12 +37,18 @@ export default function JoinPage() {
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
 
+  const [betaStatus, setBetaStatus] = useState<
+    "checking" | "online" | "offline"
+  >("checking");
+  const [betaData, setBetaData] = useState<ServerStatus | null>(null);
+  const [betaLoading, setBetaLoading] = useState(true);
+  const [betaCopied, setBetaCopied] = useState(false);
   useEffect(() => {
-    const fetchServerStatus = async () => {
+    const fetchOfficialServerStatus = async () => {
       try {
         const response = await fetch(
-          `https://api.mcsrvstat.us/2/play.openmc.fr`
-        );
+          `https://api.mcsrvstat.us/3/${process.env.NEXT_PUBLIC_IP_PROD}`
+        );    
         const data = await response.json();
 
         if (data.online) {
@@ -59,9 +68,41 @@ export default function JoinPage() {
       }
     };
 
-    fetchServerStatus();
+    fetchOfficialServerStatus();
 
-    const interval = setInterval(fetchServerStatus, 30000);
+    const interval = setInterval(fetchOfficialServerStatus, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const fetchBetaServerStatus = async () => {
+      try {
+        const response = await fetch(
+          `https://api.mcsrvstat.us/3/${process.env.NEXT_PUBLIC_IP_BETA}`
+        );    
+        const data = await response.json();
+
+        if (data.online) {
+          setBetaStatus("online");
+          setBetaData(data);
+        } else {
+          setBetaStatus("offline");
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération du statut du serveur:",
+          error
+        );
+        setBetaStatus("offline");
+      } finally {
+        setBetaLoading(false);
+      }
+    };
+
+    fetchBetaServerStatus();
+
+    const interval = setInterval(fetchBetaServerStatus, 30000);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,14 +114,31 @@ export default function JoinPage() {
     });
   };
 
+  const copyBetaIP = () => {
+    navigator.clipboard.writeText("beta.openmc.fr").then(() => {
+      setBetaCopied(true);
+      setTimeout(() => setBetaCopied(false), 2000);
+    });
+  }
+
   const getPlayerCount = () => {
     if (!serverData) return "-";
     return `${serverData.players.online}/${serverData.players.max}`;
   };
 
+  const getBetaPlayerCount = () => {
+    if (!betaData) return "-";
+    return `${betaData.players.online}/${betaData.players.max}`;
+  };
+
   const getServerVersion = () => {
-    if (!serverData || !serverData.version) return "Version: -";
-    return `Version: ${serverData.version}`;
+    if (!serverData || !serverData.protocol.name) return "Version: -";
+    return `Version: ${serverData.protocol.name}`;
+  };
+
+    const getBetaServerVersion = () => {
+    if (!betaData || !betaData.protocol.name) return "Version: -";
+    return `Version: ${betaData.protocol.name}`;
   };
 
   const getOnlinePlayers = () => {
@@ -128,7 +186,7 @@ export default function JoinPage() {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-card rounded-xl p-6 border shadow-sm">
-              <h2 className="text-2xl font-bold mb-4">Adresse du serveur</h2>
+              <h2 className="text-2xl font-bold mb-4">Adresse du serveur officiel</h2>
               <div className="bg-background rounded-lg p-4 font-mono text-lg mb-4 flex items-center justify-between">
                 <span>play.openmc.fr</span>
                 <button
@@ -139,12 +197,12 @@ export default function JoinPage() {
                 </button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Copiez cette adresse dans votre client Minecraft
+                Copiez cette adresse dans votre client Minecraft pour rejoindre le serveur officiel
               </p>
             </div>
 
             <div className="bg-card rounded-xl p-6 border shadow-sm">
-              <h3 className="text-2xl font-bold mb-4">Statut du serveur</h3>
+              <h3 className="text-2xl font-bold mb-4">Statut du serveur officiel</h3>
               <div className="flex items-center mb-4">
                 <div
                   className={`w-3 h-3 rounded-full mr-3 ${
@@ -182,6 +240,62 @@ export default function JoinPage() {
             </div>
           </div>
 
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="bg-card rounded-xl p-6 border shadow-sm">
+            <h2 className="text-2xl font-bold mb-4">Adresse du serveur bêta</h2>
+              <div className="bg-background rounded-lg p-4 font-mono text-lg mb-4 flex items-center justify-between">
+                <span>beta.openmc.fr</span>
+                <button
+                  onClick={copyBetaIP}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1 rounded text-sm transition-colors"
+                >
+                  {betaCopied ? "Copié !" : "Copier"}
+                </button>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Copiez cette adresse dans votre client Minecraft pour rejoindre le serveur bêta.
+              </p>
+          </div>
+
+          <div className="bg-card rounded-xl p-6 border shadow-sm">
+            <h3 className="text-2xl font-bold mb-4">Statut du serveur bêta</h3>
+              <div className="flex items-center mb-4">
+                <div
+                    className={`w-3 h-3 rounded-full mr-3 ${
+                    betaStatus === "online"
+                      ? "bg-green-500"
+                      : betaStatus === "offline"
+                      ? "bg-red-500"
+                      : "bg-yellow-500"
+                  }`}
+                />
+                <span className="font-medium">
+                  {betaLoading
+                    ? "Vérification..."
+                    : betaStatus === "online"
+                    ? "En ligne"
+                    : betaStatus === "offline"
+                    ? "Hors ligne"
+                    : "Vérification..."}
+                </span>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">
+                    Joueurs connectés:
+                  </span>
+                  <span className="font-medium">{getBetaPlayerCount()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Version:</span>
+                  <span className="font-medium">
+                    {getBetaServerVersion().replace("Version: ", "")}
+                  </span>
+                </div>
+              </div>
+             </div>
+        </div>  
+
           <div className="mb-12">
             <h3 className="text-3xl font-bold text-center mb-8">
               Comment rejoindre ?
@@ -201,7 +315,7 @@ export default function JoinPage() {
                 {
                   step: 3,
                   title: "Ajoutez le serveur",
-                  desc: 'Cliquez sur "Ajouter un serveur" et collez l\'adresse',
+                  desc: 'Cliquez sur "Ajouter un serveur" et collez l\'adresse du serveur officiel ou bêta',
                 },
                 {
                   step: 4,
@@ -229,7 +343,7 @@ export default function JoinPage() {
 
           <div className="mb-12">
             <h3 className="text-3xl font-bold text-center mb-8">
-              Qui est en ligne ?
+              Qui est en ligne sur le serveur officiel ?
             </h3>
             <div className="bg-card rounded-xl p-6 border shadow-sm">
               {(() => {
