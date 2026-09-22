@@ -9,7 +9,7 @@ interface CacheData<T> {
   expiresIn: number; // en millisecondes
 }
 
-interface GitHubContributor {
+export interface GitHubContributor {
   id: number;
   login: string;
   avatar_url: string;

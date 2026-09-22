@@ -2,6 +2,8 @@
 
 OpenMC est un projet communautaire open-source dédié à la création d'un serveur Minecraft innovant et collaboratif.
 
+**Ceci est le code source de son site web.**
+
 <a href="https://github.com/ServerOpenMC/Website/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ServerOpenMC/Website" alt="Contributeurs" />
 </a>
@@ -17,9 +19,8 @@ OpenMC est un projet communautaire open-source dédié à la création d'un serv
    ```
    Si des erreurs ou des warnings apparaissent, corrigez-les.
 5. Une fois une fonctionnalité implémentée et fonctionnelle, créez une pull request.
-6. Après approbation, la fonctionnalité sera disponible sur le serveur de développement pour des tests.
+6. Après approbation, la fonctionnalité sera disponible sur le site [openmc.fr](openmc.fr).
 
-- **IP du serveur** : `play.openmc.fr` (Minecraft Java Edition 26.2)
 - **Site web** : [openmc.fr](https://openmc.fr)
 
 ## 🚧 Démarrage

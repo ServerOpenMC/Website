@@ -43,6 +43,8 @@ export default function Footer() {
   >([]);
   const [loading, setLoading] = useState(true);
 
+  const [year, setYear] = useState<number | string>('');
+
   useEffect(() => {
     const fetchWebsiteContributors = async () => {
       try {
@@ -111,6 +113,8 @@ export default function Footer() {
     };
 
     fetchWebsiteContributors();
+
+    setYear(new Date().getFullYear());
   }, []);
 
   return (
@@ -225,7 +229,7 @@ export default function Footer() {
                     className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors"
                   >
                     <ExternalLink className="w-3 h-3" />
-                    Voir tous les contributeurs sur GitHub
+                    Voir tous les contributeurs du site web sur GitHub
                   </Link>
                 )}
               </div>
@@ -247,7 +251,7 @@ export default function Footer() {
                     href="/join"
                     className="hover:text-foreground transition-colors"
                   >
-                    Rejoindre le serveur
+                    Rejoindre le serveur Minecraft
                   </Link>
                 </li>
                 <li>
@@ -275,7 +279,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link
-                    href="https://discord.com/invite/H7DrUjHw7q"
+                    href="https://discord.com/invite/KA33gxE43G"
                     target="_blank"
                     className="hover:text-foreground transition-colors"
                   >
@@ -306,9 +310,11 @@ export default function Footer() {
 
           <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
             <p className="flex items-center gap-1">
-              &copy; 2025 OpenMC. Fait avec{" "}
-              <Heart className="w-4 h-4 text-red-500" fill="currentColor" /> par
-              la communauté.
+              &copy; {year} OpenMC. Fait avec{" "}
+              <Link href="/dance" className="hover:text-foreground transition-colors">
+                <Heart className="w-4 h-4 text-red-500" fill="currentColor" />
+              </Link>
+              par la communauté.
             </p>
             <div className="flex space-x-4 mt-4 sm:mt-0">
               <Link

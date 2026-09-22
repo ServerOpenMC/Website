@@ -36,7 +36,7 @@ export default function HeroSection() {
         >
           <Link href="https://github.com/ServerOpenMC/" target="_blank">
             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-              <span>✨ Open-Source</span>
+              <span>Open-Source</span>
               <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
             </AnimatedShinyText>
           </Link>
@@ -54,7 +54,7 @@ export default function HeroSection() {
         </h1>
         <p className="mt-4 leading-7 text-base sm:text-lg max-w-xl mx-auto tracking-tight text-muted-foreground">
           OpenMC est un projet communautaire open-source dédié à la création
-          d&apos;un serveur Minecraft innovant et collaboratif.
+          d&apos;un serveur Minecraft innovant et collaboratif auquel vous pouvez jouer avec vos amis.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center items-center">
           <Button className="group w-full sm:w-auto" asChild>

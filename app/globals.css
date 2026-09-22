@@ -185,3 +185,25 @@
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
+
+@keyframes dance {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(8deg);
+  }
+}
+
+.animate-dance {
+  animation: dance 0.6s infinite ease-in-out;
+  will-change: transform; 
+  backface-visibility: hidden;
+}
+
+.dance-stopping {
+  animation-duration: 1.2s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}

@@ -628,7 +628,7 @@ export default function ChangelogPage() {
                   Commits récents
                 </CardTitle>
                 <CardDescription className="text-muted-foreground">
-                  Les dernières modifications du code source
+                  Les dernières modifications du code source du plugin
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -748,10 +748,10 @@ export default function ChangelogPage() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-12 pb-8"
         >
-          <Card className="bg-card/30 border-border backdrop-blur-sm">
-            <CardContent className="pt-6">
+        <Card className="w-fit max-w-full mx-auto gap-0 p-0 bg-card/30 border-border backdrop-blur-sm">
+          <CardContent className="px-4 py-5 text-center">
               <p className="text-muted-foreground mb-2">
-                Données récupérées depuis le repository{" "}
+                Le repository du plugin{" "}
                 <a
                   href="https://github.com/ServerOpenMC/PluginV2"
                   target="_blank"
@@ -762,11 +762,12 @@ export default function ChangelogPage() {
                 </a>
               </p>
               <p className="text-sm text-muted-foreground/70">
-                Mis à jour automatiquement • Développé avec Next.js et shadcn/ui
+                Mis à jour automatiquement via le dépôt Github
               </p>
             </CardContent>
           </Card>
         </motion.div>
+
       </div>
     </div>
   );
