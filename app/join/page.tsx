@@ -19,7 +19,7 @@ interface ServerStatus {
   players: {
     online: number;
     max: number;
-    list: string[];
+    list?: (string | Player)[];
     uuid?: { [key: string]: string };
   };
   protocol: {
@@ -141,27 +141,30 @@ export default function JoinPage() {
     return `Version: ${betaData.protocol.name}`;
   };
 
-  const getOnlinePlayers = () => {
-    if (!serverData || !serverData.players.list) {
-      return [];
-    }
+  const getOnlinePlayers = (): Player[] => {
+    const list = serverData?.players.list ?? [];
+    const playerUuids = serverData?.players.uuid ?? {};
 
-    const playerNames = serverData.players.list;
-    const playerUuids = serverData.players.uuid || {};
+    return list.map((entry) => {
+      if (typeof entry === "string") {
+        return {
+          name: entry,
+          uuid: playerUuids[entry] || "undefined",
+        };
+      }
 
-    const players = playerNames.map((name) => ({
-      name: name,
-      uuid: playerUuids[name] || "undefined",
-    }));
-
-    return players;
+      return {
+        name: entry.name,
+        uuid: entry.uuid,
+      };
+    });
   };
 
   const getPlayerHead = (player: Player) => {
     if (!player.uuid || player.uuid === "undefined") {
-      return "https://crafatar.com/avatars/8667ba71b85a4004af54457a9734eed7?size=80&overlay";
+      return "https://minotar.net/avatar/2f3665cc5e29439bbd14cb6d3a6313a7/80";
     }
-    return `https://crafatar.com/avatars/${player.uuid}?size=80&overlay`;
+    return `https://minotar.net/avatar/${player.uuid}/80`;
   };
 
   return (
